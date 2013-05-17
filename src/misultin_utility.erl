@@ -531,12 +531,14 @@ get_peer(Headers, ConnectionPeerAddr) ->
 		undefined ->
 			{ok, ConnectionPeerAddr};
 		_ ->
-			case inet_parse:address(Host) of
-				{error, _Reason} ->
-					ConnectionPeerAddr;
-				{ok, IpTuple} ->
-					IpTuple
-			end
+			% Fix return value
+			inet_parse:address(Host)
+			% case inet_parse:address(Host) of
+			% 	{error, _Reason} ->
+			% 		ConnectionPeerAddr;
+			% 	{ok, IpTuple} ->
+			% 		IpTuple
+			% end
 	end.
 
 % sanitize path tokens to avoid directory traversal attacks
